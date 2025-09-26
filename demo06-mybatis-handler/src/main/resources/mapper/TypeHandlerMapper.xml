@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hxl.mapper.TypeHandlerMapper">
+
+    <!--
+      ResultMap 映射配置：定义数据库结果集与Java对象的映射规则
+      id: 这个resultMap的唯一标识符，在其他SQL映射中可以通过这个id引用此配置
+      type: 指定映射的目标Java类型，这里是完整的实体类路径 com.hxl.domain.entity.TypeHandler
+    -->
+    <resultMap id="myTypeHandler" type="com.hxl.domain.entity.UserFunction">
+        <!--
+          result 元素：定义单个字段的 -映射规则-
+          column: 指定数据库表中的列名，这里是"meeting"列
+          jdbcType: 指定数据库列的数据类型，必须是JDBC类型常量（大写），这里VARCHAR表示可变长度字符串
+          property: 指定Java对象中的属性名，这里是实体类的meeting属性
+          typeHandler: 指定自定义类型处理器，用于在Java类型和JDBC类型之间进行特殊转换
+                      这里使用com.hxl.typehandler.StringListTypeHandler处理List<String>与字符串的转换
+        -->
+        <result column="meeting"
+                jdbcType="VARCHAR"
+                property="meeting"
+                typeHandler="com.hxl.typehandler.StringListTypeHandler"
+        />
+    </resultMap>
+
+    <resultMap id="userMeetingMap" type="java.util.Map">
+        <result column="user_id" property="key" javaType="java.lang.Integer"/>
+        <result column="meeting" property="val" typeHandler="com.hxl.typehandler.StringListTypeHandler"/>
+    </resultMap>
+
+    <!--
+      查询语句：根据用户ID查询会议信息
+      id: 方法名，与Mapper接口中的方法名对应
+      resultMap: 指定使用myTypeHandler结果映射配置来处理查询结果
+    -->
+    <select id="selectByUserId" resultMap="myTypeHandler">
+        -- 从t_type_handler表中选择meeting字段，条件是user_id等于传入的参数
+        select meeting from t_user_function where user_id = #{userId}
+    </select>
+
+    <!--
+      插入语句：向数据库插入新的类型处理器记录
+      id: 方法名，与Mapper接口中的方法名对应
+      parameterType: 指定参数类型，这里应该是实体类而不是类型处理器类
+                    正确的应该是: com.hxl.domain.entity.TypeHandler
+    -->
+    <insert id="insert">
+        <!-- 向t_type_handler表插入数据，包括user_id和meeting两个字段-->
+        <!-- #{userId}: 直接使用参数对象的userId属性值-->
+        <!-- #{meeting, typeHandler=...}: 使用指定类型处理器处理meeting属性-->
+        <!-- 类型处理器会将List<String>转换为逗号分隔的字符串-->
+        insert into t_user_function (user_id, meeting)
+        values (#{userId}, #{meeting, typeHandler=com.hxl.typehandler.StringListTypeHandler})
+    </insert>
+
+    <!-- 查询多个用户的会议功能列表，结果交给MapResultHandler处理 -->
+    <select id="selectUserMeetingFunctionList" resultMap="userMeetingMap">
+        SELECT
+        user_id,
+        meeting
+        FROM t_user_function
+        WHERE user_id IN
+        <foreach item="item" collection="userList" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+</mapper>
