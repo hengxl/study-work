@@ -6,7 +6,7 @@
 
     <!-- 通用查询映射结果 -->
     <select id="selectMapById" resultType="java.util.Map">
-        select * from my_user where id = #{id}
+        select id, username from my_user where id = #{id}
     </select>
 
     <!-- 分页查询 -->

@@ -15,6 +15,7 @@
         <module>01-lambda</module>
         <module>02-stream</module>
         <module>03-optional</module>
+        <module>04-funcInterface</module>
     </modules>
 
     <properties>

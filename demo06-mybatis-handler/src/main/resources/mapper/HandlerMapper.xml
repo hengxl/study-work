@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hxl.mapper.HandlerMapper">
+
+    <!--
+      ResultMap 映射配置：定义数据库结果集与Java对象的映射规则
+      id: 这个resultMap的唯一标识符，在其他SQL映射中可以通过这个id引用此配置
+      type: 指定映射的目标Java类型
+    -->
+    <resultMap id="myTypeHandler" type="com.hxl.domain.entity.UserFunction">
+        <result column="user_id"
+                jdbcType="VARCHAR"
+                property="userId" />
+
+        <result column="meeting"
+                jdbcType="VARCHAR"
+                property="meeting"
+                typeHandler="com.hxl.handler.StringSetTypeHandler"/>
+    </resultMap>
+
+    <!--
+      查询语句：根据用户ID查询会议信息
+      id: 方法名，与Mapper接口中的方法名对应
+      resultMap: 指定使用myTypeHandler结果映射配置来处理查询结果
+    -->
+    <select id="selectByUserId" resultMap="myTypeHandler">
+        select user_id, meeting
+        from t_user_function
+        where user_id = #{userId}
+    </select>
+
+    <!--
+      插入语句：向数据库插入新的类型处理器记录
+      id: 方法名，与Mapper接口中的方法名对应
+      parameterType: 指定参数类型，这里应该是实体类而不是类型处理器类
+                    正确的应该是: com.hxl.domain.entity.TypeHandler
+    -->
+    <insert id="insert">
+        <!-- 向t_type_handler表插入数据，包括user_id和meeting两个字段-->
+        <!-- #{userId}: 直接使用参数对象的userId属性值-->
+        <!-- #{meeting, typeHandler=...}: 使用指定类型处理器处理meeting属性-->
+        <!-- 类型处理器会将List<String>转换为逗号分隔的字符串-->
+        insert into t_user_function (user_id, meeting)
+        values (#{userId}, #{meeting, typeHandler=com.hxl.handler.StringSetTypeHandler})
+    </insert>
+
+    <select id="selectString" resultType="java.lang.String">
+        SELECT meeting FROM t_user_function
+        WHERE FIND_IN_SET(#{code}, meeting) = 0
+    </select>
+
+    <select id="selectFuncSetByUserId" resultMap="myTypeHandler">
+        select meeting
+        from t_user_function
+        where user_id = #{userId}
+    </select>
+
+
+    <!-- 这里的 property参数映射Map 由MapResultHandler里自定义来指定 -->
+    <resultMap id="funcResultHandler" type="java.util.Map">
+        <result column="user_id" property="key" javaType="java.lang.Integer"/>
+        <result column="meeting" property="value" typeHandler="com.hxl.handler.StringSetTypeHandler"/>
+    </resultMap>
+    <select id="selectFuncMap" resultMap="funcResultHandler">
+        SELECT user_id, meeting
+        FROM t_user_function
+        WHERE user_id IN
+        <foreach collection="userIds" item="uId" open="(" close=")" separator=",">
+            #{uId}
+        </foreach>
+    </select>
+</mapper>

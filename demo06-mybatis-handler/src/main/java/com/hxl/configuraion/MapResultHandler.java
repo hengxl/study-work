@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author SunYang
+ * @author hengxiaolaing
  * @version 1.0
  * @description: key-value方式的mybatis结果处理器
- * @date 2021/02/19 11:58
+ * @date 2025/09/19 11:58
  */
 public class MapResultHandler<K, V> implements ResultHandler {
 
@@ -19,7 +19,7 @@ public class MapResultHandler<K, V> implements ResultHandler {
     @Override
     public void handleResult(ResultContext context) {
         Map<K, V> map = (Map) context.getResultObject();
-        mappedResults.put((K) map.get("key"), map.get("val"));
+        mappedResults.put((K) map.get("key"), map.get("value"));
     }
 
     public Map<K, V> getMappedResults() {
