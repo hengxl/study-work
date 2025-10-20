@@ -5,21 +5,16 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hxl</groupId>
-        <artifactId>study-work</artifactId>
+        <artifactId>demo666-workTest</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo666-workTest</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>demo01-spring-jdbc</module>
-        <module>demo02-rest-template</module>
-        <module>demo03-map-lazy-supplier</module>
-    </modules>
+    <artifactId>demo02-rest-template</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
 </project>
