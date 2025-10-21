@@ -24,4 +24,26 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!--TODO:子模块继承了父项目的spring-boot-maven-plugin配置
+         但子模块本身并非 Spring Boot 应用（无启动类、无 Spring Boot 依赖）
+         导致插件强制执行repackage目标时失败 解决如下：
+         在子模块中禁用spring-boot-maven-plugin的repackage目标 -->
+    <build>
+        <plugins>
+            <!-- 显式配置插件，覆盖父项目的默认行为 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <!-- 版本继承自父项目，无需重复指定 -->
+                <executions>
+                    <execution>
+                        <id>repackage</id>
+                        <!-- 禁用repackage目标 -->
+                        <phase>none</phase>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

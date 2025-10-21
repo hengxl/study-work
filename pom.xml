@@ -14,11 +14,10 @@
         <module>demo02-spring-jdbc</module>
         <module>demo03-zeroIce</module>
         <module>demo04-funcProgram</module>
-        <module>demo05-freeMaker</module>
-        <module>demo06-mybatis-handler</module>
         <module>demo07-springContextHolder</module>
         <module>demo09-mapStruct</module>
         <module>demo666-workTest</module>
+        <module>demo06-lazy-supplier-handler</module>
     </modules>
 
     <parent>
@@ -169,6 +168,12 @@
                 <version>${mapstruct.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+            </dependency>
+
             <!-- ========== 文档生成 ========== -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -204,6 +209,12 @@
                 <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.13.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
