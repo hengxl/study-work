@@ -15,6 +15,7 @@ public class User {
 
     private String password;
 
+    // TODO: 数据库里是Phone 驼峰不会有问题
     private String phone;
 
     private String info;

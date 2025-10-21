@@ -1,6 +1,7 @@
 package com.hxl.base;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 public class Demo01 {
     /**

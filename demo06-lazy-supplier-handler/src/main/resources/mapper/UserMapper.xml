@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hxl.mapper.UserMapper">
+
+    <resultMap id="userFuncTypeHandler" type="com.hxl.domain.entity.UserFunction">
+        <result column="meeting"
+                jdbcType="VARCHAR"
+                property="meeting"
+                typeHandler="com.hxl.hande.StringSetTypeHandler"/>
+    </resultMap>
+
+    <!-- TODO:这里的 key 和 value 的别名遵从 MapResultHandler 里的命名方式 -->
+    <select id="selectFuncMapByUserIds" resultType="java.util.Map">
+        select user_id 'key', meeting 'value'
+        from t_user_function
+        where user_id in
+        <foreach collection="userList" item="uid" index="index" open="(" separator="," close=")">
+            #{uid}
+        </foreach>
+    </select>
+
+
+    <select id="selectFuncSetByUserId" resultType="com.hxl.domain.entity.UserFunction" resultMap="userFuncTypeHandler">
+        select meeting
+        from t_user_function
+        where user_id = #{userId}
+    </select>
+
+    <!-- 判断 存在某个权限type 的所有的权限
+         find_in_set 没有找到则返回0，找到则返回位置（从1开始）
+    -->
+    <select id="queryByFuncType" resultType="com.hxl.domain.entity.UserFunc">
+        select *
+        from t_user_function
+        where find_in_set(#{type}, meeting) > 0
+    </select>
+</mapper>

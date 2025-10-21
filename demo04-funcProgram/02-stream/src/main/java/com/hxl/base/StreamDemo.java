@@ -1,9 +1,9 @@
 package com.hxl.base;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import java.util.*;
-import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
