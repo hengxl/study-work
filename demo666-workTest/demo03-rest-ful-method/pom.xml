@@ -5,22 +5,33 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.hxl</groupId>
-        <artifactId>study-work</artifactId>
+        <artifactId>demo666-workTest</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>demo666-workTest</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>demo01-spring-jdbc</module>
-        <module>demo02-rest-template</module>
-        <module>demo03-rest-ful-method</module>
-        <module>domo04-annotation-for-dto</module>
-    </modules>
+    <artifactId>demo03-rest-ful-method</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>
