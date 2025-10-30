@@ -1,0 +1,18 @@
+server:
+  port: 9001
+
+spring:
+  profiles:
+    active: db-mysql
+
+
+# mybatis配置
+mybatis:
+  # 配置mapper.xml文件路径
+  mapper-locations: classpath:mapper/*.xml
+  # 开启驼峰转换
+  configuration:
+    map-underscore-to-camel-case: true
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
