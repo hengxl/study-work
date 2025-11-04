@@ -15,7 +15,8 @@
         <module>demo01-spring-jdbc</module>
         <module>demo02-rest-template</module>
         <module>demo03-rest-ful-method</module>
-        <module>domo04-annotation-for-dto</module>
+        <module>demo04-annotation-for-dto</module>
+        <module>demo05-dameng-database-test</module>
     </modules>
 
     <properties>
