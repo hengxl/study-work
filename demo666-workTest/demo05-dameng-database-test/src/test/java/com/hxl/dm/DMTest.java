@@ -19,4 +19,9 @@ public class DMTest {
         List<User> list = mapper.queryAll();
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void test02() {
+        List<Integer> list = null;
+    }
 }
