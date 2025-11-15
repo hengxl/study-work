@@ -1,5 +1,7 @@
 package com.hxl.valid.service;
 
+import java.util.Map;
+
 public interface DataService {
 
     /**
@@ -9,8 +11,8 @@ public interface DataService {
     void checkExist(Integer id);
 
     /**
-     * 校验授权名单
+     * 校验授权名单, 并且转换成 Map<username, authType> 结构
      * @param authStr 授权名单字符串: 例如 "hxl,2#jsj,3"
      */
-    void checkAuthStr(String authStr);
+    Map<String, String> convertAndCheckAuthStr(String authStr);
 }

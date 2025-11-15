@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 @Slf4j
 @SpringBootTest
@@ -27,11 +28,13 @@ public class DataValidTest {
     @Test
     public void checkAuthStr() {
         try {
-            dataService.checkAuthStr("衡xl,2#jsj,0");
+            Map<String, String> map = dataService.convertAndCheckAuthStr("衡_Xl,2#jsj,0");
+            // 遍历输出
+            map.forEach((username, authType) ->
+                    System.out.println("====> " + username + " -> " + authType));
         } catch (Exception e) {
             log.error("method checkAuthStr error", e);
             throw e;
         }
-
     }
 }
