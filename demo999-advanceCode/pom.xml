@@ -15,6 +15,7 @@
     <modules>
         <module>demo01-valid-data-legal</module>
         <module>demo02-optional-test</module>
+        <module>demo03-feign-client-remote</module>
     </modules>
 
     <properties>
@@ -22,5 +23,16 @@
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.hxl</groupId>
+            <artifactId>00-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+    </dependencyManagement>
 
 </project>

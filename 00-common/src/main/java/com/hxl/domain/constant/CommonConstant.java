@@ -1,4 +1,4 @@
-package com.hxl.bean.constant;
+package com.hxl.domain.constant;
 
 import java.util.Arrays;
 import java.util.HashSet;

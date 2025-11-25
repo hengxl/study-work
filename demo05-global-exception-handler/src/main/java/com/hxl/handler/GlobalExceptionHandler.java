@@ -1,7 +1,7 @@
 package com.hxl.handler;
 
-import com.hxl.bean.util.Result;
-import com.hxl.bean.util.ResultUtil;
+import com.hxl.domain.util.Result;
+import com.hxl.domain.util.ResultUtil;
 import com.hxl.exception.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

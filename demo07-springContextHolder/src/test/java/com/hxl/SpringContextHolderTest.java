@@ -1,7 +1,7 @@
 package com.hxl;
 
-import com.hxl.bean.Student;
-import com.hxl.bean.Teacher;
+import com.hxl.domain.Student;
+import com.hxl.domain.Teacher;
 import com.hxl.holder.SpringContextEasyHolder;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

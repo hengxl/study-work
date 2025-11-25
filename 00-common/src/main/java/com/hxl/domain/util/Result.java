@@ -1,4 +1,4 @@
-package com.hxl.bean.util;
+package com.hxl.domain.util;
 
 /**
  * 接口返回公用实体

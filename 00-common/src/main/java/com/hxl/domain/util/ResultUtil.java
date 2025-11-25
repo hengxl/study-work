@@ -1,7 +1,7 @@
-package com.hxl.bean.util;
+package com.hxl.domain.util;
 
 
-import com.hxl.bean.constant.CommonConst;
+import com.hxl.domain.constant.CommonConst;
 import org.springframework.util.function.SingletonSupplier;
 
 import java.util.function.Supplier;

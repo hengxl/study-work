@@ -1,4 +1,4 @@
-package com.hxl.bean;
+package com.hxl.domain;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +7,9 @@ import lombok.experimental.Accessors;
 @Data
 @NoArgsConstructor
 @Accessors(chain = true)
-public class Teacher {
+public class Student {
 
-    private String tName;
+    private String sName;
 
-    private Integer tAge;
+    private Integer sAge;
 }

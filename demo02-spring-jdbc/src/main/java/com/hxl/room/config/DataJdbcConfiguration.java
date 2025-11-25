@@ -29,9 +29,9 @@ package com.hxl.room.config;//package com.hxl.room.config;
 //        ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(false);
 //        provider.addIncludeFilter(new AssignableTypeFilter(Converter.class));
 //        Object collect = provider.findCandidateComponents("com.hst.boss.common.configuration.converter").stream()
-//                .map(bean -> {
+//                .map(domain -> {
 //                    try {
-//                        return Class.forName(bean.getBeanClassName());
+//                        return Class.forName(domain.getBeanClassName());
 //                    } catch (ClassNotFoundException e) {
 //                        throw new RuntimeException(e);
 //                    }

@@ -1,7 +1,7 @@
 package com.hxl.config;
 
-import com.hxl.bean.Student;
-import com.hxl.bean.Teacher;
+import com.hxl.domain.Student;
+import com.hxl.domain.Teacher;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

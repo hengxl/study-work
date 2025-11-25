@@ -1,7 +1,7 @@
-package com.hxl.bean.response;
+package com.hxl.domain.response;
 
-import com.hxl.bean.constant.CommonConstant;
-import com.hxl.bean.response.base.BaseResponse;
+import com.hxl.domain.constant.CommonConstant;
+import com.hxl.domain.response.base.BaseResponse;
 
 /**
  * 客户端使用返回结果

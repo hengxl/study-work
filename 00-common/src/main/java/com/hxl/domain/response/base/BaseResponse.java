@@ -1,6 +1,6 @@
-package com.hxl.bean.response.base;
+package com.hxl.domain.response.base;
 
-import com.hxl.bean.constant.CommonConstant;
+import com.hxl.domain.constant.CommonConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
