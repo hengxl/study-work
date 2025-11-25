@@ -20,7 +20,6 @@
         <module>demo06-lazy-supplier-handler</module>
         <module>demo05-global-exception-handler</module>
         <module>demo999-advanceCode</module>
-        <module>demo999-advanceCode/demo02-optional-test</module>
     </modules>
 
     <parent>
