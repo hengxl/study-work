@@ -20,6 +20,7 @@
         <module>demo06-lazy-supplier-handler</module>
         <module>demo05-global-exception-handler</module>
         <module>demo999-advanceCode</module>
+        <module>demo999-multi-module-project</module>
     </modules>
 
     <parent>
@@ -228,21 +229,23 @@
     </dependencyManagement>
     <!-- TODO: 插件管理（统一构建插件版本） -->
     <build>
-        <plugins>
-            <!-- Spring Boot Maven插件 -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <!-- Spring Boot Maven插件 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring-boot.version}</version>
+                    <configuration>
+                        <excludes>
+                            <exclude>
+                                <groupId>org.projectlombok</groupId>
+                                <artifactId>lombok</artifactId>
+                            </exclude>
+                        </excludes>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 </project>
