@@ -28,7 +28,8 @@ public class DataValidTest {
     @Test
     public void checkAuthStr() {
         try {
-            Map<String, String> map = dataService.convertAndCheckAuthStr("衡_Xl,2#jsj,0");
+//            Map<String, String> map = dataService.convertAndCheckAuthStr("衡_Xl,2#jsj,0");
+            Map<String, String> map = dataService.convertAndCheckAuthStr("");
             // 遍历输出
             map.forEach((username, authType) ->
                     System.out.println("====> " + username + " -> " + authType));

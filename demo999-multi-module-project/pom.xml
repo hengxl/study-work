@@ -9,30 +9,29 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.hxl.advance</groupId>
-    <artifactId>demo999-advanceCode</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>demo01-valid-data-legal</module>
-        <module>demo02-optional-test</module>
-        <module>demo03-feign-client-remote</module>
+        <module>manager</module>
+        <module>common</module>
+        <module>web</module>
+        <module>service</module>
     </modules>
 
+    <groupId>com.hxl.multi.module</groupId>
+    <artifactId>demo999-multi-module-project</artifactId>
+    <version>6.6.6</version>
+
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.hxl</groupId>
-            <artifactId>00-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
-
-    <dependencyManagement>
-    </dependencyManagement>
 
 </project>
