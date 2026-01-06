@@ -21,6 +21,7 @@
         <module>demo05-global-exception-handler</module>
         <module>demo999-advanceCode</module>
         <module>demo999-multi-module-project</module>
+        <module>demo10-aspect-create-table</module>
     </modules>
 
     <parent>
