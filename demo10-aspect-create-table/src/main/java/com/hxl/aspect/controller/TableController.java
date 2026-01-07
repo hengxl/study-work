@@ -1,8 +1,10 @@
 package com.hxl.aspect.controller;
 
-import com.hxl.aspect.entity.TableOne;
-import com.hxl.aspect.entity.TableTow;
-import com.hxl.aspect.service.TableService;
+import com.hxl.aspect.entity.User;
+import com.hxl.aspect.entity.Room;
+import com.hxl.aspect.entity.UserDTO;
+import com.hxl.aspect.service.RoomService;
+import com.hxl.aspect.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,15 +18,23 @@ import java.util.List;
 public class TableController {
 
     @Resource
-    private TableService service;
+    private UserService userService;
 
-    @GetMapping("/getOne")
-    public List<TableOne> getTableOne(@RequestParam("tableName") String tableName) {
-        return service.getTableOne(tableName);
+    @Resource
+    private RoomService roomService;
+
+    @GetMapping("/user")
+    public List<User> getUser(@RequestParam("tableSuffix") String tableSuffix) {
+        return userService.getUser(tableSuffix);
     }
 
-    @GetMapping("/getTwo")
-    public List<TableTow> getTableTwo(@RequestParam("tableName") String tableName) {
-        return service.getTableTow(tableName);
+    @GetMapping("/userDto")
+    public List<UserDTO> getUserDto(@RequestParam("tableSuffix") String tableSuffix) {
+        return userService.getUserDto(tableSuffix);
+    }
+
+    @GetMapping("/room")
+    public List<Room> getRoom(@RequestParam("tableSuffix") String tableSuffix) {
+        return roomService.getRoom(tableSuffix);
     }
 }

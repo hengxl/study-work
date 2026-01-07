@@ -19,7 +19,7 @@ public class YashanDatabaseServiceImpl implements IDatabaseService {
     }
 
     @Override
-    public void createTable(String tableName) {
-
+    public void createTable(String templateTable, String tableName) {
+        // 暂不实现
     }
 }

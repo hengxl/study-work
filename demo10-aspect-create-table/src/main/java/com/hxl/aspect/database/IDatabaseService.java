@@ -10,5 +10,5 @@ public interface IDatabaseService {
      /**
       * 创建表
       */
-    void createTable(String tableName);
+    void createTable(String templateTable, String tableName);
 }

@@ -21,11 +21,28 @@ public class TableCreationAspect {
     @Autowired
     private IDatabaseService databaseService;
 
+    //---------- 模板表名 ----------
+    private static final String USER_TABLE_TEMPLATE = "t_user";
+    private static final String ROOM_TABLE_TEMPLATE = "t_room";
+
     /**
-     * 基于 execution 表达式判断是否需要创建表
+     * 基于 UserMapper 方法判断是否需要创建 User相关的表
      */
-    @Around("execution(* com.hxl.aspect.mapper.TableMapper.*(..))")
-    public Object createTableByExecution(ProceedingJoinPoint joinPoint) throws Throwable {
+    @Around("execution(* com.hxl.aspect.mapper.UserMapper.*(..))")
+    public Object userTableCreation(ProceedingJoinPoint joinPoint) throws Throwable {
+        return doTableCreation(joinPoint, USER_TABLE_TEMPLATE);
+    }
+
+    /**
+     * 基于 RoomMapper 方法判断是否需要创建 Room相关的表
+     */
+    @Around("execution(* com.hxl.aspect.mapper.RoomMapper.*(..))")
+    public Object roomTableCreation(ProceedingJoinPoint joinPoint) throws Throwable {
+        return doTableCreation(joinPoint, ROOM_TABLE_TEMPLATE);
+    }
+
+    private Object doTableCreation(ProceedingJoinPoint joinPoint, String templateTable)
+            throws Throwable {
         String tableName = null;
         try {
             return joinPoint.proceed();
@@ -41,7 +58,7 @@ public class TableCreationAspect {
                 }
                 // 创建表
                 log.info("表不存在! 准备创建表: {}", tableName);
-                databaseService.createTable(tableName);
+                databaseService.createTable(templateTable, tableName);
                 log.info("重试执行...");
                 // 重试执行
                 return joinPoint.proceed();
@@ -51,9 +68,6 @@ public class TableCreationAspect {
         }
     }
 
-    /**
-     * 基于自定义注解（性能会低一点）
-     */
     @Around("@annotation(com.hxl.aspect.common.annotation.TableCreation)")
     public Object createTableByAnnotation(ProceedingJoinPoint joinPoint) throws Throwable {
         String tableName = null;
@@ -71,7 +85,7 @@ public class TableCreationAspect {
                 }
                 // 创建表
                 log.info("表不存在，准备创建表: {}", tableName);
-                databaseService.createTable(tableName);
+                databaseService.createTable(ROOM_TABLE_TEMPLATE, tableName);
                 log.info("表创建成功: {}", tableName);
                 // 重试执行
                 return joinPoint.proceed();

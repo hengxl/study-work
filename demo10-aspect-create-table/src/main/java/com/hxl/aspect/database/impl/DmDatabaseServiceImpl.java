@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 //@Profile("dm")
-// 根据配置文件中 spring.datasource.driver-class-name 属性的值是否是 dm.jdbc.driver.DMDriver 来判断是否创建该Bean
-@ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "dm.jdbc.driver.DMDriver")
+// 根据配置文件中 spring.datasource.driver-class-name 属性的值是否是 dm.jdbc.driver.DmDriver 来判断是否创建该Bean
+@ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "dm.jdbc.driver.DmDriver")
 public class DmDatabaseServiceImpl implements IDatabaseService {
 
     @Autowired
@@ -27,13 +27,19 @@ public class DmDatabaseServiceImpl implements IDatabaseService {
     }
 
     @Override
-    public void createTable(String tableName) {
+    public void createTable(String templateTable, String tableName) {
         JdbcOperations jdbcOperations = operations.getJdbcOperations();
         // 创建表
-        jdbcOperations.execute(String.format("CREATE TABLE IF NOT EXISTS %s LIKE t_table", tableName));
+        jdbcOperations.execute(String.format("CREATE TABLE IF NOT EXISTS %s LIKE %s", tableName, templateTable));
         // 插入默认数据
-        String insertSql = String.format("INSERT INTO %s (id, table_name) VALUES (%d, '%s')",
-                tableName, 1L, tableName.replace("'", "''"));
+        String insertSql = null;
+        if (templateTable.contains("user")) {
+            insertSql = String.format("INSERT INTO %s (user_id, username, table_name) VALUES (%d, '%s', '%s')",
+                    tableName, 100L, "username", tableName);
+        } else {
+            insertSql = String.format("INSERT INTO %s (room_id, room_name, table_name) VALUES (%d, '%s', '%s')",
+                    tableName, 100L, "roomName", tableName);
+        }
         jdbcOperations.execute(insertSql);
     }
 }

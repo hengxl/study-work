@@ -4,9 +4,11 @@ import com.hxl.aspect.common.model.ITableNameHolder;
 import lombok.Data;
 
 @Data
-public class TableTow implements ITableNameHolder {
+public class Room implements ITableNameHolder {
 
-    private Long id;
+    private Long roomId;
+
+    private String roomName;
 
     private String tableName;
 }
