@@ -1,6 +1,7 @@
 package com.hxl.aspect.database.impl;
 
 import com.hxl.aspect.database.IDatabaseService;
+import dm.jdbc.driver.DMException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -10,19 +11,16 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLSyntaxErrorException;
 
 @Service
-@Profile("mysql")
-public class MysqlDatabaseServiceImpl implements IDatabaseService {
+@Profile("dm")
+public class DmDatabaseServiceImpl implements IDatabaseService {
 
     @Autowired
     protected NamedParameterJdbcOperations operations;
 
     @Override
     public boolean needCreateTable(Throwable ex) {
-        if (!(ex instanceof SQLSyntaxErrorException) ){
-            return false;
-        }
-        SQLSyntaxErrorException exception = (SQLSyntaxErrorException) ex;
-        return "42S02".equalsIgnoreCase(exception.getSQLState());
+        DMException exception = (DMException) ex;
+        return exception.getErrorCode() == -2106;
     }
 
     @Override
