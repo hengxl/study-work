@@ -2,7 +2,7 @@ package com.hxl.aspect.database.impl;
 
 import com.hxl.aspect.database.IDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLSyntaxErrorException;
 
 @Service
-@Profile("mysql")
+//@Profile("mysql")
+// 根据配置文件中 spring.datasource.driver-class-name 属性的值是否是 com.mysql.cj.jdbc.Driver 来判断是否创建该Bean
+@ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "com.mysql.cj.jdbc.Driver")
 public class MysqlDatabaseServiceImpl implements IDatabaseService {
 
     @Autowired
