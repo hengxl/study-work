@@ -19,6 +19,9 @@ public class DmDatabaseServiceImpl implements IDatabaseService {
 
     @Override
     public boolean needCreateTable(Throwable ex) {
+        if (!(ex instanceof DMException)) {
+            return false;
+        }
         DMException exception = (DMException) ex;
         return exception.getErrorCode() == -2106;
     }
