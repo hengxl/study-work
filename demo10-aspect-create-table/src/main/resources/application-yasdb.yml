@@ -1,0 +1,11 @@
+# 达梦数据源配置
+spring:
+  datasource:
+    url: jdbc:yasdb://${DATABASE_IP:localhost}:${DATABASE_PORT:3308}/${DATABASE_NAME:fastmeeting}
+    username: ${DB_USERNAME:SYSDBA}
+    password: ${DB_PASSWORD:FsEntMeeting.com}
+    driver-class-name: com.yashandb.jdbc.Driver
+# mybatis 配置
+mybatis:
+  #mapper 配置文件
+  mapper-locations: classpath:mapper/*.xml

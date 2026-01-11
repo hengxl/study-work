@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:remote}
+    url: jdbc:mysql://${DATABASE_IP:8.148.27.225}:${DATABASE_PORT:23306}/${DATABASE_NAME:multi_db}?characterEncoding=utf-8&allowMultiQueries=true&tinyInt1isBit=false

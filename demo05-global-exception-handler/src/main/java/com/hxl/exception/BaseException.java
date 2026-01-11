@@ -4,11 +4,28 @@ package com.hxl.exception;
  * 基础异常类 - 所有自定义异常的父类
  */
 public class BaseException extends RuntimeException {
+
+    /**
+     * 异常编码
+     */
+    private Integer code;
+
+    /**
+     * 错误信息
+     */
+    private String message;
+
+
     /**
      * 默认无参构造
      */
     public BaseException() {
         super();
+    }
+
+    public BaseException(Integer code, String message) {
+        this.code = code;
+        this.message = message;
     }
 
     /**⭐⭐⭐⭐⭐

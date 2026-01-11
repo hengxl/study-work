@@ -1,0 +1,16 @@
+server:
+  port: 28080
+
+spring:
+  profiles:
+#    active: mysql
+    active: dm
+
+mybatis:
+  # 开启驼峰命名自动映射
+  configuration:
+    map-underscore-to-camel-case: true
+  # 指定Mapper.xml文件位置
+  mapper-locations: classpath:mapper/*.xml
+  # 指定实体类别名包
+#  type-aliases-package: com.hxl.aspect.entity

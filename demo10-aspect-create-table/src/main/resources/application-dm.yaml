@@ -1,0 +1,7 @@
+# 达梦数据源配置
+spring:
+  datasource:
+    url: jdbc:dm://${DATABASE_IP:192.168.7.112}:${DATABASE_PORT:5236}/${DATABASE_NAME:MULTI_DB}?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&compatible_mode=mysql&schema=${DATABASE_NAME:MULTI_DB}
+    username: ${DB_USERNAME:SYSDBA}
+    password: ${DB_PASSWORD:hxl0321731X}
+    driver-class-name: dm.jdbc.driver.DmDriver
