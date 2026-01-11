@@ -23,4 +23,9 @@ public class KingbaseDatabaseServiceImpl implements IDatabaseService {
     public void createTable(String templateTable, String tableName) {
         // 暂不实现
     }
+
+    @Override
+    public void fillCalendar(String year) {
+
+    }
 }

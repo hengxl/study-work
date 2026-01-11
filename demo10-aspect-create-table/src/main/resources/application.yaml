@@ -3,8 +3,8 @@ server:
 
 spring:
   profiles:
-#    active: mysql
-    active: dm
+    active: mysql
+#    active: dm
 
 mybatis:
   # 开启驼峰命名自动映射

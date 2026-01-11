@@ -42,4 +42,9 @@ public class DmDatabaseServiceImpl implements IDatabaseService {
         }
         jdbcOperations.execute(insertSql);
     }
+
+    @Override
+    public void fillCalendar(String year) {
+
+    }
 }

@@ -10,5 +10,4 @@ public interface ITableNameHolder {
      * @return 表名
      */
     String getTableName();
-
 }

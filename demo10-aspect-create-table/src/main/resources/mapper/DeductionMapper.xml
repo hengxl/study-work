@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxl.aspect.mapper.DeductionMapper">
+
+    <select id="queryDeductionData" resultType="com.hxl.aspect.entity.DeductionVo">
+        select ifnull(sum(t.data_size), 0) totalDataSize,
+        c.date_list as dateStr
+        from (
+            select data_size, end_time
+            from ${tableName}
+            where DATE(end_time) &gt;= #{startTime}
+            and DATE(end_time) &lt;= #{endTime}
+        ) as t
+        right outer join t_calendar c
+        on DATE(end_time) = c.date_list
+        where c.date_list &gt;= #{startTime}
+        and c.date_list &lt;= #{endTime}
+        group by c.date_list
+        order by c.date_list
+    </select>
+</mapper>
