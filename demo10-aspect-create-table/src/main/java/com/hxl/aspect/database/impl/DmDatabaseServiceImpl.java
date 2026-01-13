@@ -8,7 +8,10 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.stereotype.Service;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 //@Profile("dm")
 // 根据配置文件中 spring.datasource.driver-class-name 属性的值是否是 dm.jdbc.driver.DmDriver 来判断是否创建该Bean
 @ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "dm.jdbc.driver.DmDriver")
@@ -27,24 +30,9 @@ public class DmDatabaseServiceImpl implements IDatabaseService {
     }
 
     @Override
-    public void createTable(String templateTable, String tableName) {
+    public void createTable(String tableName, String tableTemplate) {
         JdbcOperations jdbcOperations = operations.getJdbcOperations();
-        // 创建表
-        jdbcOperations.execute(String.format("CREATE TABLE IF NOT EXISTS %s LIKE %s", tableName, templateTable));
-        // 插入默认数据
-        String insertSql = null;
-        if (templateTable.contains("user")) {
-            insertSql = String.format("INSERT INTO %s (user_id, username, table_name) VALUES (%d, '%s', '%s')",
-                    tableName, 100L, "username", tableName);
-        } else {
-            insertSql = String.format("INSERT INTO %s (room_id, room_name, table_name) VALUES (%d, '%s', '%s')",
-                    tableName, 100L, "roomName", tableName);
-        }
-        jdbcOperations.execute(insertSql);
-    }
-
-    @Override
-    public void fillCalendar(String year) {
-
+        jdbcOperations.execute("ALTER SESSION SET 'CTAB_SEL_WITH_CONS' = 2");
+        jdbcOperations.execute(String.format("CREATE TABLE IF NOT EXISTS %s LIKE %s", tableName, tableTemplate));
     }
 }

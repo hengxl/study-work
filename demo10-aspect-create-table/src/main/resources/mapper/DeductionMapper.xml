@@ -3,18 +3,24 @@
 <mapper namespace="com.hxl.aspect.mapper.DeductionMapper">
 
     <select id="queryDeductionData" resultType="com.hxl.aspect.entity.DeductionVo">
+        <!-- LocalDate.toString()，获取yyyy-MM-dd格式参数（适配传入参数） -->
+        <bind name="startDate" value="startTime.toString()"/>
+        <bind name="endDate" value="endTime.toString()"/>
+
         select ifnull(sum(t.data_size), 0) totalDataSize,
         c.date_list as dateStr
         from (
-            select data_size, end_time
-            from ${tableName}
-            where DATE(end_time) &gt;= #{startTime}
-            and DATE(end_time) &lt;= #{endTime}
+        select data_size, end_time
+        from ${tableName}
+        <!-- 1. 双库兼容：DATE_FORMAT()转换为yyyy-MM-dd格式，匹配参数 -->
+        where DATE_FORMAT(end_time, '%Y-%m-%d') &gt;= #{startDate}
+        and DATE_FORMAT(end_time, '%Y-%m-%d') &lt;= #{endDate}
         ) as t
         right outer join t_calendar c
-        on DATE(end_time) = c.date_list
-        where c.date_list &gt;= #{startTime}
-        and c.date_list &lt;= #{endTime}
+        <!-- 2. 双库兼容：关联条件转换为相同格式，确保匹配精准 -->
+        on DATE_FORMAT(t.end_time, '%Y-%m-%d') = DATE_FORMAT(c.date_list, '%Y-%m-%d')
+        where c.date_list &gt;= #{startDate}
+        and c.date_list &lt;= #{endDate}
         group by c.date_list
         order by c.date_list
     </select>

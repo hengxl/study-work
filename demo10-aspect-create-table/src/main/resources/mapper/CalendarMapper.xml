@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hxl.aspect.mapper.CalendarMapper">
+
+    <select id="countDateInRange" resultType="java.lang.Integer">
+        select count(*)
+        from t_calendar
+        where date_list between #{startDate} and #{endDate}
+    </select>
+
+    <insert id="batchInsertDates">
+        insert into t_calendar values
+        <foreach collection="dateList" item="date" separator=",">
+            (#{date})
+        </foreach>
+    </insert>
+
+</mapper>

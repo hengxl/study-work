@@ -4,30 +4,39 @@ CREATE DATABASE IF NOT EXISTS multi_db;
 -- 切换至目标数据库
 USE multi_db;
 
+-- 删除2026年1月用户消费分月表（存在则删除）
+DROP TABLE IF EXISTS t_deduction_2026_1;
+
+-- 删除基础用户消费模板表（存在则删除）
+DROP TABLE IF EXISTS t_deduction;
+
+-- 删除日历基础表（存在则删除）
+DROP TABLE IF EXISTS t_calendar;
+
 -- 创建日历表
-CREATE TABLE `t_calendar` (
-    `date_list` DATE NOT NULL COMMENT '日历日期（唯一非空）',
-    PRIMARY KEY (`date_list`) -- 保证日期唯一，提升查询性能
+CREATE TABLE t_calendar (
+    date_list DATE NOT NULL COMMENT '日历日期（唯一非空）',
+    PRIMARY KEY (date_list) -- 保证日期唯一，提升查询性能
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '日历基础表';
 
--- 创建基础用户消费模板表（通用表，无 username 字段）
-CREATE TABLE `t_deduction` (
-    `id` INT AUTO_INCREMENT COMMENT '主键id',
-    `start_time` DATETIME DEFAULT NULL COMMENT '开始时间',
-    `end_time` DATETIME DEFAULT NULL COMMENT '结束时间',
-    `data_size` DECIMAL(20,6) DEFAULT NULL COMMENT '消费数据量',
-    PRIMARY KEY (`id`),
-    KEY `idx_end_time` (`end_time`)
+-- 创建基础用户消费模板表
+CREATE TABLE t_deduction (
+    id INT AUTO_INCREMENT COMMENT '主键id',
+    start_time DATETIME DEFAULT NULL COMMENT '开始时间',
+    end_time DATETIME DEFAULT NULL COMMENT '结束时间',
+    data_size DECIMAL(20,6) DEFAULT NULL COMMENT '消费数据量',
+    PRIMARY KEY (id),
+    KEY idx_end_time (end_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '基础用户消费模板表';
 
--- 创建2026年1月用户消费表（分月表，无 username 字段）
-CREATE TABLE `t_deduction_2026_1` (
-    `id` INT AUTO_INCREMENT COMMENT '主键id',
-    `start_time` DATETIME DEFAULT NULL COMMENT '开始时间',
-    `end_time` DATETIME DEFAULT NULL COMMENT '结束时间',
-    `data_size` DECIMAL(20,6) DEFAULT NULL COMMENT '消费数据量',
-    PRIMARY KEY (`id`),
-    KEY `idx_end_time` (`end_time`)
+-- 创建2026年1月用户消费表
+CREATE TABLE t_deduction_2026_1 (
+    id INT AUTO_INCREMENT COMMENT '主键id',
+    start_time DATETIME DEFAULT NULL COMMENT '开始时间',
+    end_time DATETIME DEFAULT NULL COMMENT '结束时间',
+    data_size DECIMAL(20,6) DEFAULT NULL COMMENT '消费数据量',
+    PRIMARY KEY (id),
+    KEY idx_end_time (end_time)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT '基础用户消费模板表（2026年1月）';
 
 -- 批量插入t_deduction_2026_1模拟消费数据（移除 username，匹配表结构）

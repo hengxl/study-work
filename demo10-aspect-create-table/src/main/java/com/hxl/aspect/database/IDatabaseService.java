@@ -10,10 +10,5 @@ public interface IDatabaseService {
      /**
       * 创建表
       */
-    void createTable(String templateTable, String tableName);
-
-    /**
-     * 填充日历表
-     */
-    void fillCalendar(String year);
+    void createTable(String tableName, String tableTemplate);
 }
