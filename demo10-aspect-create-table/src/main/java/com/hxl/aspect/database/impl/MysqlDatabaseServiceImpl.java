@@ -35,6 +35,9 @@ public class MysqlDatabaseServiceImpl implements IDatabaseService {
         JdbcOperations jdbcOperations = operations.getJdbcOperations();
         jdbcOperations.execute(String.format("CREATE TABLE IF NOT EXISTS %s LIKE %s", tableName, tableTemplate));
         //-------------------------- 插入一些数据 --------------------------
+        if (!"t_deduction".equals(tableTemplate)) {
+            return;
+        }
         // 从表名中获取年月
         String[] tableNameSplit = tableName.split("_");
         String year = tableNameSplit[tableNameSplit.length - 2];

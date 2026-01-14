@@ -1,7 +1,7 @@
 package com.hxl.aspect.service.impl;
 
 import com.hxl.aspect.entity.Deduction;
-import com.hxl.aspect.entity.DeductionDto;
+import com.hxl.aspect.entity.StatisticsDto;
 import com.hxl.aspect.entity.DeductionVo;
 import com.hxl.aspect.mapper.DeductionMapper;
 import com.hxl.aspect.service.DeductionService;
@@ -22,21 +22,21 @@ public class DeductionServiceImpl implements DeductionService {
     private DeductionMapper mapper;
 
     @Override
-    public List<DeductionVo> getDeduction(DeductionDto deductionDto) {
+    public List<DeductionVo> getDeduction(StatisticsDto statisticsDto) {
         log.info("参数校验1...");
-        if(Objects.isNull(deductionDto)) {
+        if(Objects.isNull(statisticsDto)) {
             throw new IllegalArgumentException("参数不能为空");
         }
         log.info("参数校验2...");
-        if(Objects.isNull(deductionDto.getStartTime()) || Objects.isNull(deductionDto.getEndTime())) {
+        if(Objects.isNull(statisticsDto.getStartTime()) || Objects.isNull(statisticsDto.getEndTime())) {
             throw new IllegalArgumentException("属性不能为空");
         }
-        String tableName = getTableName(deductionDto.getStartTime());
+        String tableName = getTableName(statisticsDto.getStartTime());
 
         Deduction deduction = new Deduction();
         deduction.setTableName(tableName);
         // 属性拷贝
-        BeanUtils.copyProperties(deductionDto, deduction);
+        BeanUtils.copyProperties(statisticsDto, deduction);
         return mapper.queryDeductionData(deduction);
     }
 

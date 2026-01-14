@@ -41,6 +41,12 @@ public class AutoHandleTableAspect {
         return handleMultiTables(joinPoint, true);
     }
 
+    @Around("execution(* com.hxl.aspect.mapper.OnlineNumMapper.*(..))")
+    public Object handleOnlineNum(ProceedingJoinPoint joinPoint)
+            throws Throwable {
+        return handleMultiTables(joinPoint, false);
+    }
+
     /**
      * 自动创建表 + 填充日历表
      */

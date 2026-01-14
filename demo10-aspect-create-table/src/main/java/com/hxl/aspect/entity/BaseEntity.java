@@ -6,6 +6,8 @@ import lombok.Data;
 /**
  * 基础实体类
  * 所有子类都需要实现这个接口，用于获取表名
+ *
+ * @author hengxiaoliang
  */
 @Data
 public class BaseEntity implements ITableNameHolder {
